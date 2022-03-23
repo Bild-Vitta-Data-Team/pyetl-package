@@ -6,6 +6,7 @@ import requests
 
 
 class APIHelper:
+    CHUNKSIZE = 100000
 
     def __init__(self, origin_url, request_headers={}, request_data={}):
         if type(origin_url) is not str:
@@ -39,7 +40,7 @@ class APIHelper:
                 return response
 
         return None
-    
+
     def dataframe_to_dw(self, df, table_prefix, table_name, dw_con, dw_schema):
         df = df.replace("", np.nan)
         df = df.drop_duplicates()
@@ -47,10 +48,9 @@ class APIHelper:
         for pos, col in enumerate(df.columns.tolist()):
             if df.dtypes[pos] == "object":
                 df[col] = df[col].str.upper()
-                
+
         df.columns = df.columns.str.upper()
         df["DATA_PROCESSAMENTO"] = datetime.now()
-        
         try:
             df.to_sql(
                 f"{table_prefix}{table_name}",
@@ -63,5 +63,4 @@ class APIHelper:
             del df
             return True
         except Exception as e:
-            return "Dataframe to sql failed.", e
-
+            return e
