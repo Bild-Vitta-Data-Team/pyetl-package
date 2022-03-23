@@ -76,7 +76,7 @@ class DbHelper:
         try:
             executed = pd.read_sql(self.query, db_engine, chunksize=chunksize)
         except Exception as e:
-            print(e)
+            return e
 
         return executed
 
@@ -106,4 +106,4 @@ class DbHelper:
             del df
             return True
         except Exception as e:
-            return "Dataframe to sql failed.", e
+            return e
