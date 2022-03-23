@@ -19,6 +19,7 @@ psycopg2 = "^2.9.3"
 fdb = "^2.0.2"
 cx-Oracle = "^8.3.0"
 requests-mock = "^1.9.3"
+pytest-cov = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -26,3 +27,23 @@ pytest = "^5.2"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = ["--cov=data_pyetl"]
+filterwarnings = "ignore::RuntimeWarning"
+testpaths = ["tests"]
+
+[tool.coverage.paths]
+source = ["data_pyetl"]
+
+[tool.coverage.run]
+branch = true
+source = ["data_pyetl"]
+omit = ["data_pyetl/loggin.py"]
+
+[tool.coverage.html]
+directory = "coverage_reports"
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
