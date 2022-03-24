@@ -27,4 +27,4 @@ jobs:
           cd data-pyetl/ && poetry install
       - name: Test with pytest
         run: |
-          pytest --cov=data_pyetl --cov-report xml tests/
+          poetry run pytest --cov=data_pyetl/ --cov-report xml tests/
