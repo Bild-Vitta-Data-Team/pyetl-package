@@ -75,10 +75,9 @@ class DbHelper:
         executed = None
         try:
             executed = pd.read_sql(self.query, db_engine, chunksize=chunksize)
+            return executed
         except Exception as e:
             return e
-
-        return executed
 
     def insert_dw(self, dw_con, table_prefix, dw_schema):
         self.select_query()
@@ -86,10 +85,6 @@ class DbHelper:
 
         df = df.replace("", np.nan)
         df = df.drop_duplicates()
-
-        for pos, col in enumerate(df.columns.tolist()):
-            if df.dtypes[pos] == "object":
-                df[col] = df[col].str.upper()
 
         df.columns = df.columns.str.upper()
         df["DATA_PROCESSAMENTO"] = datetime.now()

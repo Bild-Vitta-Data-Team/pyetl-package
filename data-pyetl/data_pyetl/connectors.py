@@ -43,16 +43,19 @@ class DB_Connector:
                 pool_recycle=3600,
             )
 
+        elif self.data_source_engine == "Firebird":
+            engine = create_engine(
+                f"firebird://{self.credentials['username']}:{self.credentials['pwd']}@{self.credentials['host']}:{self.credentials['port']}/{self.credentials['db']}",
+                pool_recycle=3600,
+            )
+
         elif self.data_source_engine == "Postgres":
             engine = create_engine(
                 f"postgresql://{self.credentials['username']}:{self.credentials['pwd']}@{self.credentials['host']}:{self.credentials['port']}/{self.credentials['db']}",
                 pool_recycle=3600,
             )
 
-        elif self.data_source_engine == "Firebird":
-            engine = create_engine(
-                f"firebird://{self.credentials['username']}:{self.credentials['pwd']}@{self.credentials['host']}:{self.credentials['port']}/{self.credentials['db']}",
-                pool_recycle=3600,
-            )
+        else:
+            engine = None
 
         return engine

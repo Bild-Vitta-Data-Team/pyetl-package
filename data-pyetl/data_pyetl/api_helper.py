@@ -39,15 +39,9 @@ class APIHelper:
                 response = response.json()
                 return response
 
-        return None
-
     def dataframe_to_dw(self, df, table_prefix, table_name, dw_con, dw_schema):
         df = df.replace("", np.nan)
         df = df.drop_duplicates()
-
-        for pos, col in enumerate(df.columns.tolist()):
-            if df.dtypes[pos] == "object":
-                df[col] = df[col].str.upper()
 
         df.columns = df.columns.str.upper()
         df["DATA_PROCESSAMENTO"] = datetime.now()
