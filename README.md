@@ -1,4 +1,5 @@
 # pyetl-package
+[![codecov](https://codecov.io/gh/Bild-Vitta-Data-Team/pyetl-package/branch/main/graph/badge.svg?token=IFMEMUDG19)](https://codecov.io/gh/Bild-Vitta-Data-Team/pyetl-package)
 Ferramenta para facilitação do processo ETL feita em python
 
 # Ferramenta de empacotamento/gerência de dependências: Poetry
