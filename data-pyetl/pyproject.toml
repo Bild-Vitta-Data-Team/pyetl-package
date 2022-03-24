@@ -42,7 +42,7 @@ source = ["data_pyetl"]
 omit = ["data_pyetl/loggin.py"]
 
 [tool.coverage.html]
-directory = "coverage_reports"
+directory = "coverage"
 
 [tool.coverage.report]
 show_missing = true
