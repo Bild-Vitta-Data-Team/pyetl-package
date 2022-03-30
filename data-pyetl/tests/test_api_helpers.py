@@ -8,7 +8,7 @@ from data_pyetl.api_helper import APIHelper
 from data_pyetl.connectors import DB_Connector
 
 
-class TestDbHelpers(unittest.TestCase):
+class TestApiHelpers(unittest.TestCase):
 
     def setUp(self):
         ds_con = "SQL"
