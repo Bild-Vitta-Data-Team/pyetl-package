@@ -21,6 +21,10 @@ cx-Oracle = "^8.3.0"
 requests-mock = "^1.9.3"
 pytest-cov = "^3.0.0"
 flake8 = "^4.0.1"
+openpyxl = "^3.0.9"
+lxml = "^4.8.0"
+odfpy = "^1.4.1"
+xlrd = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
