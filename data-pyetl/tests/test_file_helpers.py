@@ -11,6 +11,15 @@ from data_pyetl.connectors import DB_Connector
 class TestFileHelpers(unittest.TestCase):
 
     def setUp(self):
+        ds_con = "SQL"
+        credentials = {
+            "host": "host",
+            "db": "db",
+            "username": "username",
+            "pwd": "pwd"
+        }
+        connector = DB_Connector(ds_con, credentials)
+        self.engine = connector.create_data_source_connection()
         test_data = {"Unnamed: 0": {"0": 1, "1": 2, "2": 3, "3": 4}, "a": {"0": "q", "1": "t", "2": "o", "3": "d"}, "b": {
             "0": "w", "1": "y", "2": "p", "3": "f"}, "c": {"0": "e", "1": "u", "2": "a", "3": "g"}, "d": {"0": "r", "1": "i", "2": "s", "3": "h"}}
         self.df_test = pd.DataFrame(test_data)
