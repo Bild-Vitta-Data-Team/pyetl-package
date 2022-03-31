@@ -3,7 +3,7 @@
 
 Ferramenta para facilitação do processo ETL feita em python
 
-
+# Uso básico de algumas funcionalidades criadas
 ## DB_Connector  
 Classe para montar conexões com varios tipos de bancos de dados utilizando SQLAlchemy.    
 Exemplo de utilização:  
