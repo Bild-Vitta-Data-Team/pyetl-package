@@ -3,7 +3,49 @@
 
 Ferramenta para facilitação do processo ETL feita em python
 
-# Ferramenta de empacotamento/gerência de dependências: Poetry
+
+## DB_Connector  
+Exemplo de utilização:  
+```
+data_source_engine = "SQL" # para MS SQLServer  
+credentials = {  
+    "host" : "your_sqlserver_host",  
+    "db": "database_name",  
+    "username": "db_username",  
+    "pwd": "db_password"  
+}  
+connector = DB_Connector(data_source_engine, credentials)  
+connector_engine = connector.create_data_source_connection()  
+# or you can make:  connector_engine = DB_Connector(data_source_engine, credentials).create_data_source_connection()  
+```
+
+## DbHelper
+Helper criado para auxiliar na extração de dados de um banco transacional possibilitando salva-los em uma nova tabela. Exemplo:  
+```
+table_name = "users"
+columns = "name, age, city"
+data_source_engine = some_sqlalchemy_engine # popde ser criado com o DB_Connector
+cutoff_columns = ["created_at", "modified_on"] # colunas de data para serem usadas como corte
+query = "" #pode ser construída antes ou depois da inicialização
+
+helper = DbHelper(table_name, columns, ds_engine, cutoff_columns, query)
+
+helper.query = helper.select_query() #definição de uma query de select para a tabela no data_source
+
+data_storage_engine = some_sqlalchemy_engine # popde ser criado com o DB_Connector
+table_prefix = "STG_" 
+data_storage_schema = "Stage_Exemplo"
+# para salvar no seu db 
+helper.insert_dw(data_storage_engine, table_prefix, data_storage_schema)
+
+```
+
+
+
+
+
+
+# Uso básico da ferramenta de empacotamento/gerência de dependências: Poetry
 
 ## Como instalar
 ### osx / linux / bashonwindows install instructions
