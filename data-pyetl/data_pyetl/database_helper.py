@@ -37,7 +37,7 @@ class DbHelper:
     def __str__(self):
         return f"StgTable({self.table_name}, {self.columns}, {self.cutoff_columns})"
 
-    def select_query(self, cutoff_date, limit_date):
+    def select_query(self, cutoff_date=None, limit_date=None):
         """
         Construct the sql query to get the iterest data for the stage
         """
@@ -83,7 +83,7 @@ class DbHelper:
         """
         Function to insert data in your DW source
         """
-        self.select_query()
+
         df = self.execute_query(self.ds_engine, self.CHUNKSIZE)
 
         df = df.replace("", np.nan)
