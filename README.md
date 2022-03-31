@@ -5,8 +5,9 @@ Ferramenta para facilitação do processo ETL feita em python
 
 
 ## DB_Connector  
+Classe para montar conexões com varios tipos de bancos de dados utilizando SQLAlchemy.    
 Exemplo de utilização:  
-```
+```python
 data_source_engine = "SQL" # para MS SQLServer  
 credentials = {  
     "host" : "your_sqlserver_host",  
@@ -20,8 +21,9 @@ connector_engine = connector.create_data_source_connection()
 ```
 
 ## DbHelper
-Helper criado para auxiliar na extração de dados de um banco transacional possibilitando salva-los em uma nova tabela. Exemplo:  
-```
+Helper criado para auxiliar na extração de dados de um banco transacional possibilitando salva-los em uma nova tabela.  
+Exemplo:  
+```python
 table_name = "users"
 columns = "name, age, city"
 data_source_engine = some_sqlalchemy_engine # popde ser criado com o DB_Connector
@@ -41,9 +43,10 @@ helper.insert_dw(data_storage_engine, table_prefix, data_storage_schema)
 ```
 
 ## FileHelper
-Helper criado para auxiliar na extração de dados vindos de planilhas ou arquivos Json ou XML. Exemplo: 
+Helper criado para auxiliar na extração de dados vindos de planilhas ou arquivos Json ou XML.  
+Exemplo: 
 
-```
+```python
 filepath = "./test.xslx"
 filetype = "xlsx"
 
@@ -61,11 +64,38 @@ helper.dataframe_to_db(data_frame, table_prefix, table_name, data_storage_engine
 
 ```
 
+## APIHelper
+Helper criado para auxiliar na extração de dados vindos de api's.  
+Exemplo:
+```python
+origin_url = "https:www.exemplo.com"
+# não obrigatório
+request_headers = {
+    "Authorization": "Token <secutiry_token>"
+    }
+# não obrigatório
+request_data = {"data" : "some request data"} 
 
-# Uso básico da ferramenta de empacotamento/gerência de dependências: Poetry
+helper = APIHelper(origin_url, request_headers, request_data)
 
-## Como instalar
-### osx / linux / bashonwindows install instructions
+#se quiser a resposta ja como um dataframe do pandas
+data_frame = helper.get_data(dataframe=True)
+
+#se quiser a resposta como json para depois transpormar em um dataframe na sua aplicação
+response = helper.get_data()
+
+# uma vez com um dataframe definido e desejar salvar no seu banco de dados
+data_storage_engine = some_sqlalchemy_engine # popde ser criado com o DB_Connector
+table_prefix = "STG_" 
+data_storage_schema = "Stage_Exemplo"
+table_name = "TesteAPI"
+
+helper.dataframe_to_dw(data_frame, table_prefix, table_name, data_storage_engine, data_storage_schema)
+
+```
+
+## Uso básico da ferramenta de empacotamento/gerência de dependências: Poetry
+### Instalação em : osx / linux / bashonwindows 
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
 ```
