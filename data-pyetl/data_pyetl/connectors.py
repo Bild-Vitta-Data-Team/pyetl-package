@@ -18,6 +18,9 @@ class DB_Connector:
             self.credentials = credentials
 
     def create_data_source_connection(self):
+        """
+        Function to create a sqlalchemy based database connection
+        """
         if self.data_source_engine == "SQL":
             params = urllib.parse.quote_plus(
                 "DRIVER={ODBC Driver 17 for SQL Server};"

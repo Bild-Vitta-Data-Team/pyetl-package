@@ -80,6 +80,9 @@ class DbHelper:
             return e
 
     def insert_dw(self, dw_con, table_prefix, dw_schema):
+        """
+        Function to insert data in your DW source
+        """
         self.select_query()
         df = self.execute_query(self.ds_engine, self.CHUNKSIZE)
 

@@ -39,6 +39,9 @@ class APIHelper:
                 return response
 
     def dataframe_to_dw(self, df, table_prefix, table_name, dw_con, dw_schema):
+        """
+        Save the worked pandas DataFrame to the source DW
+        """
         df = df.replace("", np.nan)
         df = df.drop_duplicates()
 
