@@ -157,7 +157,7 @@ class TestFileHelpers(unittest.TestCase):
         self.assertEqual(df_data, xml_mock.side_effect)
 
     @patch('pandas.DataFrame.to_sql')
-    def test_dataframe_to_dw(self, to_sql_mock: Mock):
+    def test_dataframe_to_db(self, to_sql_mock: Mock):
         to_sql_mock.return_value = None
         self.helper.filetype = "csv"
         self.helper.filepath = "tests/test.csv"
@@ -165,7 +165,7 @@ class TestFileHelpers(unittest.TestCase):
         table_prefix = "STGTest_"
         table_name = "Test"
         dw_schema = "TESTdb"
-        inserted = self.helper.dataframe_to_dw(
+        inserted = self.helper.dataframe_to_db(
             df_data,
             table_prefix,
             table_name,
@@ -177,7 +177,7 @@ class TestFileHelpers(unittest.TestCase):
         self.assertTrue(inserted)
 
     @patch('pandas.DataFrame.to_sql', **{'return_value.raiseError.side_effect': Exception()})
-    def test_insert_dataframe_to_dw_error(self, to_sql_mock: Mock):
+    def test_insert_dataframe_to_db_error(self, to_sql_mock: Mock):
         to_sql_mock.side_effect = Exception("Error dataframe to sql")
         self.helper.filetype = "csv"
         self.helper.filepath = "tests/test.csv"
@@ -185,7 +185,7 @@ class TestFileHelpers(unittest.TestCase):
         table_prefix = "STGTest_"
         table_name = "Test"
         dw_schema = "TESTdb"
-        inserted = self.helper.dataframe_to_dw(
+        inserted = self.helper.dataframe_to_db(
             df_data,
             table_prefix,
             table_name,

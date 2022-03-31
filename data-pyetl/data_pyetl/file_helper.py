@@ -61,7 +61,7 @@ class FileHelper:
         except Exception as e:
             return e
 
-    def dataframe_to_dw(self, df, table_prefix, table_name, dw_con, dw_schema):
+    def dataframe_to_db(self, df, table_prefix, table_name, dw_con, dw_schema):
         """
         Save the worked pandas DataFrame to the source DW
         """

@@ -40,9 +40,26 @@ helper.insert_dw(data_storage_engine, table_prefix, data_storage_schema)
 
 ```
 
+## FileHelper
+Helper criado para auxiliar na extração de dados vindos de planilhas ou arquivos Json ou XML. Exemplo: 
+
+```
+filepath = "./test.xslx"
+filetype = "xlsx"
+
+helper = FileHelper(filepath, filetype)
+
+data_frame = helper.read_xls_to_dataframe()
 
 
+# depois de fazer os ajustes necessarios (ou não), é só usar:
+data_storage_engine = some_sqlalchemy_engine # popde ser criado com o DB_Connector
+table_prefix = "STG_" 
+data_storage_schema = "Stage_Exemplo"
+table_name = "TestePlanilha"
+helper.dataframe_to_db(data_frame, table_prefix, table_name, data_storage_engine, data_storage_schema)
 
+```
 
 
 # Uso básico da ferramenta de empacotamento/gerência de dependências: Poetry
