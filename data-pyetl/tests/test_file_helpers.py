@@ -146,3 +146,44 @@ class TestFileHelpers(unittest.TestCase):
         xml_mock.assert_called()
         self.assertIsInstance(df_data, Exception)
         self.assertEqual(df_data, xml_mock.side_effect)
+
+    @patch('pandas.DataFrame.to_sql')
+    def test_dataframe_to_dw(self, to_sql_mock: Mock):
+        to_sql_mock.return_value = None
+        self.helper.filetype = "csv"
+        self.helper.filepath = "tests/test.csv"
+        df_data = self.helper.read_csv_to_dataframe()
+        table_prefix = "STGTest_"
+        table_name = "Test"
+        dw_schema = "TESTdb"
+        inserted = self.helper.dataframe_to_dw(
+            df_data,
+            table_prefix,
+            table_name,
+            self.engine,
+            dw_schema
+        )
+
+        to_sql_mock.assert_called_once()
+        self.assertTrue(inserted)
+
+    @patch('pandas.DataFrame.to_sql', **{'return_value.raiseError.side_effect': Exception()})
+    def test_insert_dataframe_to_dw_error(self, to_sql_mock: Mock):
+        to_sql_mock.side_effect = Exception("Error dataframe to sql")
+        self.helper.filetype = "csv"
+        self.helper.filepath = "tests/test.csv"
+        df_data = self.helper.read_csv_to_dataframe()
+        table_prefix = "STGTest_"
+        table_name = "Test"
+        dw_schema = "TESTdb"
+        inserted = self.helper.dataframe_to_dw(
+            df_data,
+            table_prefix,
+            table_name,
+            self.engine,
+            dw_schema
+        )
+
+        to_sql_mock.assert_called_once()
+        self.assertIsInstance(inserted, Exception)
+        self.assertEqual(inserted, to_sql_mock.side_effect)

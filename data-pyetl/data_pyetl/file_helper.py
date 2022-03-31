@@ -4,6 +4,7 @@ import pandas as pd
 
 
 class FileHelper:
+    CHUNKSIZE = 100000
 
     def __init__(self, filepath, filetype):
         if type(filepath) is not str:
@@ -57,5 +58,28 @@ class FileHelper:
         try:
             df = pd.read_xml(self.filepath)
             return df
+        except Exception as e:
+            return e
+
+    def dataframe_to_dw(self, df, table_prefix, table_name, dw_con, dw_schema):
+        """
+        Save the worked pandas DataFrame to the source DW
+        """
+        df = df.replace("", np.nan)
+        df = df.drop_duplicates()
+
+        df.columns = df.columns.str.upper()
+        df["DATA_PROCESSAMENTO"] = datetime.now()
+        try:
+            df.to_sql(
+                f"{table_prefix}{table_name}",
+                dw_con,
+                schema=dw_schema,
+                if_exists="replace",
+                index=False,
+                chunksize=self.CHUNKSIZE
+            )
+            del df
+            return True
         except Exception as e:
             return e
