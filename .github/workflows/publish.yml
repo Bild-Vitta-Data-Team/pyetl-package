@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        run: apt install libpq-dev postgresql-server-dev-all unixodbc-dev
       - name: Publish python poetry package
         uses: JRubics/poetry-publish@v1.10
         with:
