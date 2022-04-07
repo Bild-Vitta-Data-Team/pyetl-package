@@ -10,9 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Publish python poetry package
-        uses: JRubics/poetry-publish@v1.10
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          build_format: "sdist"
-          allow_poetry_pre_release: "yes"
-          ignore_dev_requirements: "yes"
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
