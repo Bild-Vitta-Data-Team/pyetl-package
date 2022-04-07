@@ -16,16 +16,7 @@ jobs:
         with:
           python-version: 3.8.12
       - uses: actions/checkout@v2
-      - run: |
-          sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
-          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-          source $HOME/.poetry/env
-          poetry install
       - name: Publish python poetry package
         uses: JRubics/poetry-publish@v1.10
         with:
-          python_version: "3.8.12"
-          poetry_version: "==1.1.13" # (PIP version specifier syntax)
           pypi_token: ${{ secrets.PYPI_TOKEN }}
-          build_format: "sdist"
-          allow_poetry_pre_release: "yes"
