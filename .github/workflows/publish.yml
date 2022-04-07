@@ -8,12 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.8.12
       - uses: actions/checkout@v2
       - name: Publish python poetry package
         uses: JRubics/poetry-publish@v1.10
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
+          build_format: "sdist"
+          allow_poetry_pre_release: "yes"
+          ignore_dev_requirements: "yes"
