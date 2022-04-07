@@ -18,5 +18,5 @@ jobs:
           python_version: "3.8.12"
           poetry_version: "==1.1.13" # (PIP version specifier syntax)
           pypi_token: ${{ secrets.PYPI_TOKEN }}
+          build_format: "sdist"
           allow_poetry_pre_release: "yes"
-          ignore_dev_requirements: "yes"
