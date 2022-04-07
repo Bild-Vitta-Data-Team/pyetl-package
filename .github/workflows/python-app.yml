@@ -33,10 +33,10 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         with:
-          directory: ./data-pyetl
+          directory: ./
           env_vars: OS,PYTHON
           fail_ci_if_error: true
-          files: ./data-pyetl/coverage.xml
+          files: ./coverage.xml
           flags: unittests
           name: codecov-umbrella
           verbose: true
