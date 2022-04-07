@@ -11,6 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8.12
       - uses: actions/checkout@v2
       - run: |
           sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
