@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
+      - run: |
+          sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          source $HOME/.poetry/env
+          poetry install
       - name: Publish python poetry package
         uses: JRubics/poetry-publish@v1.10
         with:
