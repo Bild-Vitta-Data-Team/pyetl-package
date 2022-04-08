@@ -19,9 +19,8 @@ jobs:
       - name: Install server dependencies
         run: |
           python -m pip install --upgrade pip
-          sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
-          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-          source $HOME/.poetry/env
+          sudo apt-get install libpq-dev
+          pip install poetry
           poetry install
 
       - name: Build Package
@@ -45,7 +44,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Build and publish to pypi
-        uses: JRubics/poetry-publish@v1.8
+        uses: JRubics/poetry-publish@v1.10
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           extra_build_dependency_packages: "libpq-dev postgresql-server-dev-all unixodbc-dev"

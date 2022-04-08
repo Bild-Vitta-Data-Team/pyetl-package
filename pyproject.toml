@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data-pyetl"
-version = "1.0.22"
+version = "1.0.23"
 description = "Data Pyetl is an python approach to extract and load data from a source to a database"
 authors = ["MacSoares <macario.junior@gmail.com>"]
 
