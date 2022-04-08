@@ -43,11 +43,9 @@ jobs:
         with:
           python-version: 3.8.12
 
-      - name: Install work dependencies
-        run: sudo apt-get install libpq-dev postgresql-server-dev-all unixodbc-dev
-
       - uses: actions/checkout@v2
       - name: Build and publish to pypi
         uses: JRubics/poetry-publish@v1.8
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
+          extra_build_dependency_packages: libpq-dev postgresql-server-dev-all unixodbc-dev
