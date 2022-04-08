@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "data-pyetl"
-version = "1.0.18"
+version = "1.0.19"
 description = "Data Pyetl is an python approach to extract and load data from a source to a database"
 authors = ["MacSoares <macario.junior@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8.12"
+python = "^3.8"
 pandas = "^1.4.1"
 numpy = "^1.22.3"
 SQLAlchemy = "^1.4.32"
