@@ -148,25 +148,25 @@ class TestDbHelpers(unittest.TestCase):
 
         self.assertEqual(query, select_query)
 
-    @patch('data_pyetl.database_helper.pd.read_sql')
-    def test_execute_query(self, read_sql_mock: Mock):
-        read_sql_mock.return_value = pd.DataFrame({"foo_id": [1, 2, 3]})
+    @patch('data_pyetl.database_helper.pd.read_sql_query')
+    def test_execute_query(self, read_sql_query_mock: Mock):
+        read_sql_query_mock.return_value = pd.DataFrame({"foo_id": [1, 2, 3]})
 
         executed = self.helper.execute_query(self.engine)
-        read_sql_mock.assert_called_once()
+        read_sql_query_mock.assert_called_once()
         pd.testing.assert_frame_equal(
             executed, pd.DataFrame({"foo_id": [1, 2, 3]}))
         self.assertIsInstance(executed, pd.DataFrame)
 
-    @patch('data_pyetl.database_helper.pd.read_sql', **{'return_value.raiseError.side_effect': Exception()})
-    def test_execute_query_exception(self, read_sql_mock: Mock):
-        read_sql_mock.side_effect = Exception("Error on read sql")
+    @patch('data_pyetl.database_helper.pd.read_sql_query', **{'return_value.raiseError.side_effect': Exception()})
+    def test_execute_query_exception(self, read_sql_query_mock: Mock):
+        read_sql_query_mock.side_effect = Exception("Error on read sql")
 
         executed = self.helper.execute_query(self.engine)
 
-        read_sql_mock.assert_called_once()
+        read_sql_query_mock.assert_called_once()
         self.assertIsInstance(executed, Exception)
-        self.assertEqual(executed, read_sql_mock.side_effect)
+        self.assertEqual(executed, read_sql_query_mock.side_effect)
 
     @patch('pandas.DataFrame.to_sql')
     def test_insert_dw(self, to_sql_mock: Mock):

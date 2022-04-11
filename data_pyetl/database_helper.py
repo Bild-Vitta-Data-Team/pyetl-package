@@ -74,7 +74,8 @@ class DbHelper:
         """
         executed = None
         try:
-            executed = pd.read_sql(self.query, db_engine, chunksize=chunksize)
+            executed = pd.read_sql_query(
+                self.query, db_engine, chunksize=chunksize)
             return executed
         except Exception as e:
             return e
