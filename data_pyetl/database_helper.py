@@ -68,14 +68,14 @@ class DbHelper:
 
         return self.query
 
-    def execute_query(self, db_engine, chunksize=100000):
+    def execute_query(self, db_engine):
         """
         Execute the self.query on a given database
         """
         executed = None
         try:
             executed = pd.read_sql_query(
-                self.query, db_engine, chunksize=chunksize)
+                self.query, db_engine)
             return executed
         except Exception as e:
             return e
