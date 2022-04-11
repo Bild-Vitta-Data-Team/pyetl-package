@@ -85,7 +85,7 @@ class DbHelper:
         Function to insert data in your DW source
         """
 
-        df = self.execute_query(self.ds_engine, self.CHUNKSIZE)
+        df = self.execute_query(self.ds_engine)
 
         df = df.replace("", np.nan)
         df = df.drop_duplicates()
