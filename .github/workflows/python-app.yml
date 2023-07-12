@@ -28,7 +28,6 @@ jobs:
           python -m pip install --upgrade pip
           sudo apt-get install libpq-dev
           pip install poetry
-          source $HOME/.poetry/env
           poetry install
           poetry run pytest --cov=data_pyetl/ --cov-report xml tests/
       - name: Upload coverage to Codecov
