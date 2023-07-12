@@ -61,6 +61,16 @@ class FileHelper:
         except Exception as e:
             return e
 
+    def read_parquet_to_dataframe(self):
+        """
+        Read parquet file
+        """
+        try:
+            df = pd.read_parquet(self.filepath, engine='fastparquet')
+            return df
+        except Exception as e:
+            return e
+
     def dataframe_to_db(self, df, table_prefix, table_name, dw_con, dw_schema):
         """
         Save the worked pandas DataFrame to the source DW
