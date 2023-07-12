@@ -25,7 +25,9 @@ jobs:
           python-version: "3.8.17"
       - name: Install dependencies and Test
         run: |
-          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          python -m pip install --upgrade pip
+          sudo apt-get install libpq-dev
+          pip install poetry
           source $HOME/.poetry/env
           poetry install
           poetry run pytest --cov=data_pyetl/ --cov-report xml tests/
