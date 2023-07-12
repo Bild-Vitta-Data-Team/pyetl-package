@@ -156,6 +156,24 @@ class TestFileHelpers(unittest.TestCase):
         self.assertIsInstance(df_data, Exception)
         self.assertEqual(df_data, xml_mock.side_effect)
 
+    def test_get_parquet_data_dataframe(self):
+        self.helper.filetype = "parquet"
+        self.helper.filepath = "tests/test.parquet"
+        df_data = self.helper.read_parquet_to_dataframe()
+
+        self.assertIsInstance(df_data, pd.DataFrame)
+
+    @patch('pandas.read_parquet', **{'return_value.raiseError.side_effect': Exception()})
+    def test_get_parquet_data_dataframe_error(self, parquet_mock: Mock):
+        parquet_mock.side_effect = Exception("Failed to mount dataframe")
+        self.helper.filetype = "parquet"
+        self.helper.filepath = "tests/test.parquet"
+        df_data = self.helper.read_parquet_to_dataframe()
+
+        parquet_mock.assert_called()
+        self.assertIsInstance(df_data, Exception)
+        self.assertEqual(df_data, parquet_mock.side_effect)
+
     @patch('pandas.DataFrame.to_sql')
     def test_dataframe_to_db(self, to_sql_mock: Mock):
         to_sql_mock.return_value = None

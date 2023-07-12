@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data-pyetl"
-version = "1.0.26"
+version = "1.0.27"
 description = "Data Pyetl is an python approach to extract and load data from a source to a database"
 authors = ["MacSoares <macario.junior@gmail.com>"]
 
@@ -25,6 +25,7 @@ openpyxl = "^3.0.9"
 lxml = "^4.8.0"
 odfpy = "^1.4.1"
 xlrd = "^2.0.1"
+fastparquet = "^2023.7.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
